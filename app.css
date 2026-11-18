@@ -1,0 +1,4 @@
+html,body{margin:0;padding:0;background:#0e0f12;color:#e8e8ea;font:16px/1.4 system-ui,sans-serif}
+#app{padding:1.25rem}
+#status{opacity:.85}
+#payload{white-space:pre-wrap;background:#181a20;padding:1rem;border-radius:8px;overflow:auto}
