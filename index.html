@@ -3,16 +3,48 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Desk</title>
-  <link rel="stylesheet" href="app.css">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Grok Bot">
+  <title>Grok Bot</title>
   <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="stylesheet" href="app.css">
 </head>
 <body>
-  <main id="app">
-    <h1>Desk</h1>
-    <p id="status">Skeleton. Live view arrives in a later step.</p>
-    <pre id="payload" hidden></pre>
-  </main>
+  <div id="error-banner" hidden></div>
+  <div id="app" class="loading">
+    <div class="skel-home">
+      <div class="navbar">
+        <div class="skel av"></div>
+        <div class="skel line w80"></div>
+        <div class="skel ic"></div>
+        <div class="skel ic"></div>
+      </div>
+      <div class="pad">
+        <div class="skel bal"></div>
+        <div class="skel line w40"></div>
+        <div class="skel chart"></div>
+        <div class="skel live"></div>
+        <div class="skel line w50"></div>
+        <div class="skel-row">
+          <div class="skel card"></div>
+          <div class="skel card"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav id="tabbar" hidden>
+    <button data-tab="home" class="on" type="button"><span class="ico">⌂</span><span>Home</span></button>
+    <button data-tab="bots" type="button"><span class="ico">◎</span><span>Bots</span></button>
+    <button data-tab="activity" type="button"><span class="ico">≡</span><span>Activity</span></button>
+    <button data-tab="account" type="button"><span class="ico">☺</span><span>Account</span></button>
+  </nav>
+  <div id="sheet" hidden></div>
+  <div id="toast" hidden></div>
   <script src="chart.js"></script>
   <script src="app.js"></script>
 </body>
