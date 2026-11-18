@@ -421,3 +421,7 @@ img { max-width: 100%; display: block; }
   .odometer { font-size: 66px; }
   .digit { height: 66px; }
 }
+
+a.row, a.btn { text-decoration: none; color: inherit; }
+.odometer.muted { font-size: 28px; letter-spacing: 0; color: var(--tertiary); min-height: 36px; }
+.empty { min-height: 64px; }

@@ -305,8 +305,8 @@
     var balRow = el("div", "balance-row");
     var odo = el("div", "odometer");
     if (st.balance == null) {
-      odo.appendChild(el("span", "cur", ""));
-      odo.appendChild(el("span", "digits", "—"));
+      odo.classList.add("muted");
+      odo.appendChild(el("span", "digits", ""));
     } else {
       odo.appendChild(el("span", "cur", "$"));
       odo.appendChild(buildOdo(fmtMoney(st.balance)));
@@ -338,6 +338,9 @@
     pad.appendChild(ranges);
 
     pad.appendChild(liveCard(st));
+
+    var previewEarly = st.activity_preview || [];
+    if (!previewEarly.length) pad.appendChild(el("div", "empty", "Waiting for the first trade"));
 
     var botsH = el("div", "section-h");
     var nRun = st.bots_running;
@@ -977,7 +980,7 @@
   /* ---------- poll ---------- */
   function pollAll() {
     if (!cfg.path || !cryptoKey) return Promise.resolve();
-    if (demoError()) { store.offline = true; showError(true); return Promise.resolve(); }
+    if (demoError()) { store.offline = true; store.retryIn = POLL_MS / 1000; showError(true); render(); return Promise.resolve(); }
     var jobs = [
       loadJson("state.json").then(function (d) { store.state = d; }),
       loadJson("chart.json").then(function (d) { store.chart = d; }),
@@ -1034,5 +1037,24 @@
     });
   }
 
+  window.addEventListener("hashchange", function () {
+    var f = parseFragment();
+    if (f.s) store.view = f.s;
+    else if (!["home","bots","activity","account","search","live","coin","audit"].includes(store.view)) store.view = "home";
+    if (f.m) store.mint = f.m;
+    if (f.s === "home" || f.s === "bots" || f.s === "activity" || f.s === "account") {
+      store.view = f.s;
+    }
+    if (f.s === "coin" || f.s === "audit") {
+      store.view = f.s;
+      if (store.mint) {
+        if (store.view === "coin") ensureCoin(store.mint);
+        if (store.view === "audit") ensureAudit(store.mint);
+      }
+    }
+    render();
+  });
+
   boot();
 })();
+
