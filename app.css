@@ -376,8 +376,11 @@ img { max-width: 100%; display: block; }
 #sheet {
   position: fixed; inset: 0; z-index: 50;
   background: rgba(0,0,0,0.5);
-  display: flex; align-items: flex-end; justify-content: center;
+  display: none;
+  align-items: flex-end; justify-content: center;
 }
+#sheet:not([hidden]) { display: flex; }
+#sheet[hidden], #toast[hidden] { display: none !important; }
 #sheet .panel {
   width: 100%; max-width: 480px;
   background: var(--card);
